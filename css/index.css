@@ -102,11 +102,9 @@ ul, li
 }
 .Lakemedel
 {
-    background-color: #6687e7;
-}
-.Lakemedel:nth-child(odd)
-{
-    background-color: #4169e1;
+    color: black;
+    background-color: #FFF;
+    border-bottom: 2px solid #3E60AA;
 }
 .indent
 {
