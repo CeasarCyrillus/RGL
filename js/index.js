@@ -136,37 +136,14 @@ function replaceAll(str, find, replace)
 function showInfo(id)
 {
     closeAlert();
+    var ids = ["forbud", "dispens", "ovrigt", "name", "form", "ic", "ooc", "klass"]
     var el = document.getElementById("popupInfo");
-    el.className = "animated slideInRight"
-
-    var forbud_text = document.getElementById("forbud");
-    forbud_text.innerHTML = "<h3><b>Förbud</b></h3>"+currentData[id]["forbud"];
-    //forbud_text.innerHTML = "<b>Förbud: </b>"+currentData[id]["forbud"];
-    
-
-    var dispens_text = document.getElementById("dispens");
-    dispens_text.innerHTML = "<h3><b>Dispens</b></h3>"+currentData[id]["dispens"];
-    //dispens_text.innerHTML = "<b>Dispens: </b>"+currentData[id]["dispens"];
-
-    var ovrigt_text = document.getElementById("ovrigt");
-    ovrigt_text.innerHTML = "<h3><b>Övrigt</b></h3>"+currentData[id]["ovrigt"];
-    //ovrigt_text.innerhtml = "<b>Övrigt: </b>" + currentData[id]["ovrigt"];
-    
-    var name_text = document.getElementById("name");
-    name_text.innerHTML = "<h2><b>" + currentData[id]["name"] + "</b></h2>";
-
-    var form_text = document.getElementById("form");
-    form_text.innerHTML = "<b>Beredningsform: </b>" + currentData[id]["form"];
-
-    var ic_text = document.getElementById("ic");
-    ic_text.innerHTML = "<b>På tävling: </b>" + currentData[id]["ic"];
-
-    var ooc_text = document.getElementById("ooc");
-    ooc_text.innerHTML = "<b>Utanför tävling: </b>" + currentData[id]["ooc"];
-
-    var dopinklass_text = document.getElementById("klass");
-    dopinklass_text.innerHTML = "<b>Dopingklass: </b>" + currentData[id]["klass"];
-
+    el.style.display = "block";
+    el.className = "animated slideInRight";
+    for(var i = 0; i < ids.length; i++)
+    {
+        document.getElementById(ids[i]).innerHTML = currentData[id][ids[i]];
+    }
     document.getElementById("upButton").style.display = "none";
     displayUpButton = false;
 }
@@ -180,7 +157,7 @@ function displayData()
     closeAlert();
     var results = 0;
     var string = document.getElementById("search").value;
-    var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn"><b>NAME</b><br>FORM</div></li>';
+    var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
     if(string.length > 0)
     {
         document.getElementById('result').innerHTML = "";
@@ -196,24 +173,30 @@ function displayData()
                 if(ean == string)
                 {
                     results += 1;
-                    var name = replaceAll(prep[0], "\n", "");
+                    var name = "<h2><b>"+replaceAll(prep[0], "\n", "")+"</b></h2>";
                     var form = replaceAll(prep[1], "\n", "");
-                    var ic = replaceAll(prep[2], "\n", "");
-                    var ooc = replaceAll(prep[3], "\n", "");
+                    var ic = "<b>Tillåtet under tävling: </b>" + replaceAll(prep[2], "\n", "");
+                    var ooc = "<b>Tillåtet utanför tävling: </b>"+replaceAll(prep[3], "\n", "");
+                    var klass = "<b>Dopingklass: </b>"+replaceAll(prep[8], "\n", "");
                     var forbud = replaceAll(prep[4], "\n", "<br>");
                     var dispens = replaceAll(prep[5], "\n", "<br>");
                     var ovrigt = replaceAll(prep[6], "\n", "<br>");
-                    var klass = replaceAll(prep[8], "\n", "");
                     
-                    currentData[i] = {"name":name, "form":form, "ic":ic,
-                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
-                                        "ovrigt":ovrigt, "klass":klass};
                     
+                    if(forbud.length > 1){forbud = "<h3><b>Förbud</b></h3>" + forbud;}
+                    else{forbud = "<b>Förbud: </b>" + forbud;}
+                    if(dispens.length > 1){dispens = "<h3><b>Dispens</b></h3>" + dispens;}
+                    else{dispens = "<b>Dispens: </b>" + dispens;}
+                    if(ovrigt.length > 1){ovrigt = "<h3><b>Övrigt</b></h3>" + ovrigt;}
+                    else{ovrigt = "<b>Övrigt: </b>" + ovrigt;}
                     var text = format.replace("ID", i);
                     var text = text.replace("NAME", name);
                     var text = text.replace("FORM", form);
-                    
                     innerhtml += text;
+                    var form = "<b>Beredningsform: </b>" + form;
+                    currentData[i] = {"name":name, "form":form, "ic":ic,
+                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
+                                        "ovrigt":ovrigt, "klass":klass};                    
                 }
             }
             else
@@ -223,23 +206,30 @@ function displayData()
                 if (name.toLowerCase().indexOf(string.toLowerCase())+1 > 0)
                 {
                     results += 1;
-                    var name = replaceAll(prep[0], "\n", "");
+                    var name = "<h2><b>"+replaceAll(prep[0], "\n", "")+"</b></h2>";
                     var form = replaceAll(prep[1], "\n", "");
-                    var ic = replaceAll(prep[2], "\n", "");
-                    var ooc = replaceAll(prep[3], "\n", "");
+                    var ic = "<b>Tillåtet under tävling: </b>" + replaceAll(prep[2], "\n", "");
+                    var ooc = "<b>Tillåtet utanför tävling: </b>"+replaceAll(prep[3], "\n", "");
+                    var klass = "<b>Dopingklass: </b>"+replaceAll(prep[8], "\n", "");
                     var forbud = replaceAll(prep[4], "\n", "<br>");
                     var dispens = replaceAll(prep[5], "\n", "<br>");
                     var ovrigt = replaceAll(prep[6], "\n", "<br>");
-                    var klass = replaceAll(prep[8], "\n", "");
                     
-                    currentData[i] = {"name":name, "form":form, "ic":ic,
-                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
-                                        "ovrigt":ovrigt, "klass":klass};
                     
+                    if(forbud.length > 1){forbud = "<h3><b>Förbud</b></h3>" + forbud;}
+                    else{forbud = "<b>Förbud: </b>" + forbud;}
+                    if(dispens.length > 1){dispens = "<h3><b>Dispens</b></h3>" + dispens;}
+                    else{dispens = "<b>Dispens: </b>" + dispens;}
+                    if(ovrigt.length > 1){ovrigt = "<h3><b>Övrigt</b></h3>" + ovrigt;}
+                    else{ovrigt = "<b>Övrigt: </b>" + ovrigt;}
                     var text = format.replace("ID", i);
                     var text = text.replace("NAME", name);
                     var text = text.replace("FORM", form);
                     innerhtml += text;
+                    var form = "<b>Beredningsform: </b>" + form;
+                    currentData[i] = {"name":name, "form":form, "ic":ic,
+                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
+                                        "ovrigt":ovrigt, "klass":klass}; 
                 }
             }
             document.getElementById('result').innerHTML = innerhtml;
