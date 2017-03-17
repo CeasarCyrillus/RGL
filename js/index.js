@@ -132,57 +132,39 @@ function replaceAll(str, find, replace)
         return str.replace(new RegExp(find, 'g'), replace);
 }
 
-function showInfo(FORBUD, DISPENS, OVRIGT, FORM, NAME, IC, OOC, KLASS)
+function showInfo(id)
 {
     closeAlert();
     var el = document.getElementById("popupInfo");
     el.style.display = "block";
 
     var forbud_text = document.getElementById("forbud");
-    if(FORBUD.length > 1)
-    {
-        forbud_text.innerHTML = "<h3><b>Förbud</b></h3>"+FORBUD;
-    }
-    else
-    {
-        forbud_text.innerHTML = "<b>Förbud: </b>"+FORBUD;
-    }
+    forbud_text.innerHTML = "<h3><b>Förbud</b></h3>"+currentData[id]["forbud"];
+    //forbud_text.innerHTML = "<b>Förbud: </b>"+currentData[id]["forbud"];
     
 
     var dispens_text = document.getElementById("dispens");
-    if(DISPENS.length > 1)
-    {
-        dispens_text.innerHTML = "<h3><b>Dispens</b></h3>"+ DISPENS;
-    }
-    else
-    {
-        dispens_text.innerHTML = "<b>Dispens: </b>"+ DISPENS;
-    }
+    dispens_text.innerHTML = "<h3><b>Dispens</b></h3>"+currentData[id]["dispens"];
+    //dispens_text.innerHTML = "<b>Dispens: </b>"+currentData[id]["dispens"];
 
     var ovrigt_text = document.getElementById("ovrigt");
-    if(OVRIGT.length > 1)
-    {
-        ovrigt_text.innerHTML = "<h3><b>Övrigt</b></h3>"+ OVRIGT;
-    }
-    else
-    {
-        ovrigt_text.innerhtml = "<b>Övrigt: </b>";
-    }
+    ovrigt_text.innerHTML = "<h3><b>Övrigt</b></h3>"+currentData[id]["ovrigt"];
+    //ovrigt_text.innerhtml = "<b>Övrigt: </b>" + currentData[id]["ovrigt"];
     
     var name_text = document.getElementById("name");
-    name_text.innerHTML = "<h2><b>" + NAME + "</b></h2>";
+    name_text.innerHTML = "<h2><b>" + currentData[id]["name"] + "</b></h2>";
 
     var form_text = document.getElementById("form");
-    form_text.innerHTML = "<b>Beredningsform: </b>" + FORM;
+    form_text.innerHTML = "<b>Beredningsform: </b>" + currentData[id]["form"];
 
     var ic_text = document.getElementById("ic");
-    ic_text.innerHTML = "<b>På tävling: </b>" + IC;
+    ic_text.innerHTML = "<b>På tävling: </b>" + currentData[id]["ic"];
 
     var ooc_text = document.getElementById("ooc");
-    ooc_text.innerHTML = "<b>Utanför tävling: </b>" + OOC;
+    ooc_text.innerHTML = "<b>Utanför tävling: </b>" + currentData[id]["ooc"];
 
     var dopinklass_text = document.getElementById("klass");
-    dopinklass_text.innerHTML = "<b>Dopingklass: </b>" + KLASS;
+    dopinklass_text.innerHTML = "<b>Dopingklass: </b>" + currentData[id]["klass"];
 
     document.getElementById("upButton").style.display = "none";
     displayUpButton = false;
@@ -198,9 +180,11 @@ function displayData()
     var results = 0;
     var string = document.getElementById("search").value;
     document.getElementById('result').innerHTML = "";
-    var format = '<li class="Lakemedel"><div onclick="showInfo(FORBUD, DISPENS, OVRIGT, ' + "'FORM'" + ', ' + "'NAME'" + ', ' + "'IC'" + ', ' + "'OOC'" + ", 'KLASS'" + ');" class="Produktnamn"><b>NAME</b><br>FORM</div></li>';
+    var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn"><b>NAME</b><br>FORM</div></li>';
     if(string.length > 0)
     {
+        document.getElementById('result').innerHTML = "";
+        currentData = {};
         var innerhtml = "";
         for(var i = 0; i < drugs.length; i++)
         {
@@ -220,15 +204,15 @@ function displayData()
                     var dispens = replaceAll(prep[5], "\n", "<br>");
                     var ovrigt = replaceAll(prep[6], "\n", "<br>");
                     var klass = replaceAll(prep[8], "\n", "");
-
-                    var replaceThis = ["IC", "OOC", "FORM", "FORBUD", "DISPENS", "OVRIGT", "NAME", "KLASS"];
-                    var withThis = [ic, ooc, form, "'"+forbud+"'", "'"+dispens+"'", "'"+ovrigt+"'", name, klass];
                     
-                    var text = format;
-                    for(var nr = 0; nr < replaceThis.length; nr++)
-                    {
-                        var text = replaceAll(text, replaceThis[nr], withThis[nr]);
-                    }
+                    currentData[i] = {"name":name, "form":form, "ic":ic,
+                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
+                                        "ovrigt":ovrigt, "klass":klass};
+                    
+                    var text = format.replace("ID", i);
+                    var text = text.replace("NAME", name);
+                    var text = text.replace("FORM", form);
+                    
                     innerhtml += text;
                 }
             }
@@ -238,7 +222,7 @@ function displayData()
                 if(results > 10){break;}
                 if (name.toLowerCase().indexOf(string.toLowerCase())+1 > 0)
                 {
-                    //results += 1;
+                    results += 1;
                     var name = replaceAll(prep[0], "\n", "");
                     var form = replaceAll(prep[1], "\n", "");
                     var ic = replaceAll(prep[2], "\n", "");
@@ -247,20 +231,20 @@ function displayData()
                     var dispens = replaceAll(prep[5], "\n", "<br>");
                     var ovrigt = replaceAll(prep[6], "\n", "<br>");
                     var klass = replaceAll(prep[8], "\n", "");
-
-                    var replaceThis = ["IC", "OOC", "FORM", "FORBUD", "DISPENS", "OVRIGT", "NAME", "KLASS"];
-                    var withThis = [ic, ooc, form, "'"+forbud+"'", "'"+dispens+"'", "'"+ovrigt+"'", name, klass];
                     
-                    var text = format;
-                    for(var nr = 0; nr < replaceThis.length; nr++)
-                    {
-                        var text = replaceAll(text, replaceThis[nr], withThis[nr]);
-                    }
-                    innerhtml += text;
+                    currentData[i] = {"name":name, "form":form, "ic":ic,
+                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
+                                        "ovrigt":ovrigt, "klass":klass};
+                    
+                    var text = format.replace("ID", i);
+                    var text = text.replace("NAME", name);
+                    var text = text.replace("FORM", form);
+                    
+                    document.getElementById('result').innerHTML += innerhtml;
                 }
             }
         }
-        document.getElementById('result').innerHTML = innerhtml;
+        //document.getElementById('result').innerHTML = innerhtml;
         if (!innerhtml.length > 0)
         {
             document.getElementById('result').innerHTML = "<p>Inget Resultat!</p>";
