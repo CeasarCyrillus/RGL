@@ -84,10 +84,11 @@ function startApp()
     document.getElementById("search").disabled = false;
     document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
 }
+
 function closePopup()
 {
     var el = document.getElementById("popupInfo");
-    el.style.display = "none";
+    el.className = "animated slideOutRight";
 
 
     displayUpButton = true;
@@ -136,7 +137,7 @@ function showInfo(id)
 {
     closeAlert();
     var el = document.getElementById("popupInfo");
-    el.style.display = "block";
+    el.className = "animated slideInRight"
 
     var forbud_text = document.getElementById("forbud");
     forbud_text.innerHTML = "<h3><b>Förbud</b></h3>"+currentData[id]["forbud"];
@@ -179,7 +180,6 @@ function displayData()
     closeAlert();
     var results = 0;
     var string = document.getElementById("search").value;
-    document.getElementById('result').innerHTML = "";
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn"><b>NAME</b><br>FORM</div></li>';
     if(string.length > 0)
     {
@@ -239,10 +239,10 @@ function displayData()
                     var text = format.replace("ID", i);
                     var text = text.replace("NAME", name);
                     var text = text.replace("FORM", form);
-                    
-                    document.getElementById('result').innerHTML += innerhtml;
+                    innerhtml += text;
                 }
             }
+            document.getElementById('result').innerHTML = innerhtml;
         }
         //document.getElementById('result').innerHTML = innerhtml;
         if (!innerhtml.length > 0)

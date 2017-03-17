@@ -106,6 +106,7 @@ ul, li
     background-color: #FFF;
     border-bottom: 2px solid #3E60AA;
 }
+
 .indent
 {
     margin-left: 20px;
@@ -137,7 +138,6 @@ p
 
 #popupInfo
 {
-    display: none;
     width: 100vw;
     height: 100vh;
     font-size: 20px;
