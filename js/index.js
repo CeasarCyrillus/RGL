@@ -238,7 +238,7 @@ function displayData()
                 if(results > 10){break;}
                 if (name.toLowerCase().indexOf(string.toLowerCase())+1 > 0)
                 {
-                    results += 1;
+                    //results += 1;
                     var name = replaceAll(prep[0], "\n", "");
                     var form = replaceAll(prep[1], "\n", "");
                     var ic = replaceAll(prep[2], "\n", "");
