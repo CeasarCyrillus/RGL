@@ -142,8 +142,9 @@ ul, li
 {
     font-size: 20px;
     display: inline-block;
-    max-width: 200px;
+    width: 100%
 }
+
 p
 {
     text-align: left;
@@ -273,6 +274,7 @@ h2
     width: 45px;
     transition: width .1s;
 }
+
 #formInput
 {
     text-align: center;
