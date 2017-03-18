@@ -263,7 +263,7 @@ function loadData()
 {
     document.getElementById("loader").style.display = "block";
     drugs = LZString.decompress(localStorage.getItem("drugs")).split(";;");
-    document.getElementById("loader").style.display = "none";
+    //document.getElementById("loader").style.display = "none";
     startApp();
 }
 
