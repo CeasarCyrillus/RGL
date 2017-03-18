@@ -227,10 +227,6 @@ function displayData()
             }
         }
         document.getElementById('result').innerHTML = innerhtml;
-        if (!innerhtml.length > 0)
-        {
-            document.getElementById('result').innerHTML = "<p>Inget Resultat!</p>";
-        }
     }
     else
     {
