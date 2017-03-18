@@ -121,14 +121,20 @@ ul, li
 #header
 {
     text-align: center;
-    margin: 20px 0;
+    margin: 5px 0 20px 0;
 }
 
+#top
+{
+    padding: 0;
+}
 #topHeader
 {
     text-align: center;
+    font-family: 'Open Sans';
     font-size: 32px;
-    color: black;
+    color: #FFF;
+    background-color: rgb(62, 96, 170);
 }
 
 #search
@@ -255,11 +261,10 @@ h2
 }
 #fileInputImg
 {
-
-    background-image: "static/cam.png";
+    float: right;
     width: 35px;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
 #fileInputImg::active
