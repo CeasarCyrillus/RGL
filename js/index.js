@@ -158,11 +158,11 @@ function displayData()
     var results = 0;
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
+    var innerhtml = "";
     if(string.length > 0)
     {
         document.getElementById('result').innerHTML = "";
         currentData = {};
-        var innerhtml = "";
         if(isNum(string))
         {
             for(var i = 0; i < drugs.length; i++)
@@ -225,6 +225,11 @@ function displayData()
                                         "ovrigt":ovrigt, "klass":klass}; 
                 }
             }
+        }
+
+        if(results == 0)
+        {
+            innerhtml = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!";
         }
         document.getElementById('result').innerHTML = innerhtml;
     }
