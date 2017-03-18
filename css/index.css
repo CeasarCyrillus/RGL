@@ -128,6 +128,7 @@ ul, li
 {
     padding: 0;
 }
+
 #topHeader
 {
     text-align: center;
@@ -263,8 +264,8 @@ h2
 {
     float: right;
     width: 35px;
+    height: 100%;
     display: inline-block;
-    vertical-align: middle;
 }
 
 #fileInputImg::active
