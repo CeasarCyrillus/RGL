@@ -173,14 +173,14 @@ function displayData()
                 if(ean == string)
                 {
                     results += 1;
-                    var name = "<h2><b>"+replaceAll(prep[0], "\n", "")+"</b></h2>";
-                    var form = replaceAll(prep[1], "\n", "");
-                    var ic = "<b>Tillåtet under tävling: </b>" + replaceAll(prep[2], "\n", "");
-                    var ooc = "<b>Tillåtet utanför tävling: </b>"+replaceAll(prep[3], "\n", "");
-                    var klass = "<b>Dopingklass: </b>"+replaceAll(prep[8], "\n", "");
-                    var forbud = replaceAll(prep[4], "\n", "<br>");
-                    var dispens = replaceAll(prep[5], "\n", "<br>");
-                    var ovrigt = replaceAll(prep[6], "\n", "<br>");
+                    var name = "<h2><b>"+prep[0]+"</b></h2>";
+                    var form = prep[1];
+                    var ic = "<b>Tillåtet under tävling: </b>" + prep[2];
+                    var ooc = "<b>Tillåtet utanför tävling: </b>"+prep[3];
+                    var klass = "<b>Dopingklass: </b>"+prep[8];
+                    var forbud = prep[4];
+                    var dispens = prep[5];
+                    var ovrigt = prep[6];
                     
                     
                     if(forbud.length > 1){forbud = "<h3><b>Förbud</b></h3>" + forbud;}
@@ -206,14 +206,14 @@ function displayData()
                 if (name.toLowerCase().indexOf(string.toLowerCase())+1 > 0)
                 {
                     results += 1;
-                    var name = "<h2><b>"+replaceAll(prep[0], "\n", "")+"</b></h2>";
-                    var form = replaceAll(prep[1], "\n", "");
-                    var ic = "<b>Tillåtet under tävling: </b>" + replaceAll(prep[2], "\n", "");
-                    var ooc = "<b>Tillåtet utanför tävling: </b>"+replaceAll(prep[3], "\n", "");
-                    var klass = "<b>Dopingklass: </b>"+replaceAll(prep[8], "\n", "");
-                    var forbud = replaceAll(prep[4], "\n", "<br>");
-                    var dispens = replaceAll(prep[5], "\n", "<br>");
-                    var ovrigt = replaceAll(prep[6], "\n", "<br>");
+                    var name = "<h2><b>"+prep[0]+"</b></h2>";
+                    var form = prep[1];
+                    var ic = "<b>Tillåtet under tävling: </b>" + prep[2];
+                    var ooc = "<b>Tillåtet utanför tävling: </b>"+prep[3];
+                    var klass = "<b>Dopingklass: </b>"+prep[8];
+                    var forbud = prep[4];
+                    var dispens = prep[5];
+                    var ovrigt = prep[6];
                     
                     
                     if(forbud.length > 1){forbud = "<h3><b>Förbud</b></h3>" + forbud;}
