@@ -121,7 +121,8 @@ ul, li
 #header
 {
     text-align: center;
-    margin: 5px 0 20px 0;
+    margin: 0;
+    padding: 0;
 }
 
 #top
@@ -140,10 +141,11 @@ ul, li
 
 #search
 {
-    font-size: 20px;
+    font-size: 24px;
     display: inline-block;
-    max-width: 200px;
+    width: 100%
 }
+
 p
 {
     text-align: left;
@@ -273,9 +275,13 @@ h2
     width: 45px;
     transition: width .1s;
 }
+
 #formInput
 {
     text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #Alert
