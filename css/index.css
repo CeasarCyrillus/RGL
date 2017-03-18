@@ -36,7 +36,7 @@ body
 }
 html, body
 {
-    background-color: #7a96ea;
+    background-color: #FFF;
     padding: 0;
     margin: 0;
 }
@@ -123,6 +123,13 @@ ul, li
     text-align: center;
     margin: 20px 0;
 }
+#topHeader
+{
+    text-align: center;
+    font-size: 32px;
+    color: black;
+}
+
 #search
 {
     font-size: 20px;
