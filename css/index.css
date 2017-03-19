@@ -188,23 +188,6 @@ p
     color: #000;
 }
 
-
-#closebutton
-{
-    width: 100px;/*Scrollbar main div får ej vara fixed*/
-    padding: 10px;
-    margin: 20px 0 20px calc(50vw - 60px);
-    color: white;
-    background-color: #6687e7;
-    text-align: center;
-    border-radius: 10px;
-}
-
-#closebutton:active
-{
-    color: white;
-}
-
 #upButton, #anslut
 {
     position: fixed;
