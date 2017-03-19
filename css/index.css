@@ -178,6 +178,14 @@ p
     padding: 0;
 }
 
+#popupInfo #backButton
+{
+    width: 25px;
+    height: 25px;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+}
+
 #result
 {
     padding-bottom: 20px;
