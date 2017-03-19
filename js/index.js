@@ -89,11 +89,6 @@ function closePopup()
 {
     var el = document.getElementById("popupInfo");
     el.className = "animated slideOutRight";
-
-
-    displayUpButton = true;
-    scrolled();
-    
 }
 
 function checkNetwork()
@@ -144,8 +139,6 @@ function showInfo(id)
     {
         document.getElementById(ids[i]).innerHTML = currentData[id][ids[i]];
     }
-    document.getElementById("upButton").style.display = "none";
-    displayUpButton = false;
 }
 
 function isNum(string)
@@ -309,18 +302,5 @@ function checkUpdate()
     }
 }
 
-function scrolled()
-{
-    var st = window.pageYOffset;
-    if(st > 160 && displayUpButton)
-    {
-        document.getElementById("upButton").style.display = "block";
-    }
-    else
-    {
-        document.getElementById("upButton").style.display = "none";
-    }
-}
-window.addEventListener("scroll", scrolled);
 var url = "http://fecabook.hol.es/handlefile.php?filename=";
 checkUpdate();
