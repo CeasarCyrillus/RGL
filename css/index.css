@@ -182,6 +182,7 @@ p
 {
     width: 44px;
     height: 100%;
+    padding: 0;
     display: inline-block;
     float: left;
 }
