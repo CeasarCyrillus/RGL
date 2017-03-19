@@ -272,7 +272,7 @@ function checkUpdate()
     /* If user is starting app for first time*/
     if(document.getElementById("anslut") != null)
     {
-        document.getElementById("anslut").innerHTML = "Ansluter...";
+        document.getElementById("anslut").innerHTML = "Ansluter..";
     }
     try
     {
