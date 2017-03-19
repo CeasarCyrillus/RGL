@@ -162,9 +162,18 @@ p
     position: fixed;
     overflow: scroll;
     top: 0;
-    background-color: #4169e1;
+    background-color: #FFF;
+    color: #2F292B;
+}
+#popupInfo b
+{
+    color: #6580BB;
+}
+#popupInfo #name
+{
     color: white;
 }
+
 #result
 {
     padding-bottom: 20px;
@@ -222,7 +231,7 @@ p
 h3
 {
     text-align: center;
-    margin-bottom: 0;
+    margin: 0;
 }
 h2 
 {
