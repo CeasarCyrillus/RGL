@@ -279,12 +279,7 @@ h2
     width: 35px;
     height: 100%;
     display: inline-block;
-}
-
-#fileInputImg::active
-{
-    width: 45px;
-    transition: width .1s;
+    vertical-align: bottom;
 }
 
 #formInput
