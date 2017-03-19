@@ -180,10 +180,10 @@ p
 
 #popupInfo #backButton
 {
-    width: 25px;
-    height: 25px;
-    border-bottom: 2px solid white;
-    border-left: 2px solid white;
+    width: 44px;
+    height: 100%;
+    display: inline-block;
+    float: left;
 }
 
 #result
