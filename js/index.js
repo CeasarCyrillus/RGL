@@ -89,6 +89,9 @@ function closePopup()
 {
     var el = document.getElementById("popupInfo");
     el.className = "animated slideOutRight";
+
+    el = document.getElementById("backButton");
+    el.className = "animated rotateOut";
 }
 
 function checkNetwork()
@@ -135,6 +138,8 @@ function showInfo(id)
     var el = document.getElementById("popupInfo");
     el.style.display = "block";
     el.className = "animated slideInRight";
+    el = document.getElementById("backButton");
+    el.className = "animated rotateIn";
     for(var i = 0; i < ids.length; i++)
     {
         document.getElementById(ids[i]).innerHTML = currentData[id][ids[i]];
