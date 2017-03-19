@@ -84,7 +84,28 @@ function startApp()
     document.getElementById("search").disabled = false;
     document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
 }
+function showInfo(id)
+{
+    closeAlert();
+    var ids = ["name", "form", "ic", "ooc", "klass", "forbud", "dispens", "ovrigt"];
+    var el = document.getElementById("popupInfo");
+    el.style.display = "block";
+    el.className = "animated slideInRight";
+    el = document.getElementById("backButton");
+    el.className = "animated rotateIn";
+    //body of popuping
+    setTimeout(function()
+    {
+        document.getElementById("infoBody").style.display = "block";
+        document.getElementById("infoBody").className = "animated slideInUp"; //
+    }, 200);
 
+    for(var i = 0; i < ids.length; i++)
+    {
+        el = document.getElementById(ids[i]);
+        el.innerHTML = currentData[id][ids[i]];
+    }
+}
 function closePopup()
 {
     var el = document.getElementById("popupInfo");
@@ -92,6 +113,9 @@ function closePopup()
 
     el = document.getElementById("backButton");
     el.className = "animated rotateOut";
+
+    //Animate out body
+    document.getElementById("infoBody").className = "animated slideOutDown"; //
 }
 
 function checkNetwork()
@@ -131,21 +155,6 @@ function replaceAll(str, find, replace)
         return str.replace(new RegExp(find, 'g'), replace);
 }
 
-function showInfo(id)
-{
-    closeAlert();
-    var ids = ["forbud", "dispens", "ovrigt", "name", "form", "ic", "ooc", "klass"];
-    var el = document.getElementById("popupInfo");
-    el.style.display = "block";
-    el.className = "animated slideInRight";
-    el = document.getElementById("backButton");
-    el.className = "animated rotateIn";
-    for(var i = 0; i < ids.length; i++)
-    {
-        document.getElementById(ids[i]).innerHTML = currentData[id][ids[i]];
-    }
-}
-
 function isNum(string)
 {
     return string.match(/^[0-9]+$/) != null;
@@ -156,6 +165,7 @@ function displayData()
     var results = 0;
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
+    document.getElementById("loader").style.display = "block";
     var innerhtml = "";
     if(string.length > 0)
     {

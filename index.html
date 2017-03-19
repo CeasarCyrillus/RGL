@@ -45,7 +45,7 @@
 
 <body>
     <input type="text" id="hiddenInput">
-    <div id="loader"></div>
+    <img id="loader" src="img/loading.gif">
     <div id="topHeader">Röd-Gröna listan<img id="fileInputImg" src="img/cam1.png" onclick="scan();"></div>
     <div id="header">
         <form id="formInput" oninput="displayData();">
@@ -58,14 +58,16 @@
     </div>
     <div ondblclick="closePopup();" id="popupInfo">
     	<div id="infoHeader"><img id="backButton" onclick="closePopup();" src="img/backButton.png">Information</div>
-    	<div id="name"></div>
-        <div id="form"></div>
-        <div id="ic"></div>
-        <div id="ooc"></div>
-        <div id="klass"></div>
-        <div id="forbud"></div>
-        <div id="dispens"></div>
-        <div id="ovrigt"></div>
+    	<div id="infoBody">
+	    	<div id="name"></div>
+	        <div id="form"></div>
+	        <div id="ic"></div>
+	        <div id="ooc"></div>
+	        <div id="klass"></div>
+	        <div id="forbud"></div>
+	        <div id="dispens"></div>
+	        <div id="ovrigt"></div>
+	   	</div>
     </div>
     <div id="result"></div>
     <script type="text/javascript" src="js/lz-string.js"></script>

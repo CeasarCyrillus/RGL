@@ -177,6 +177,10 @@ p
     margin: 0;
     padding: 0;
 }
+#infoBody
+{
+    display: none;
+}
 
 #popupInfo #backButton
 {
@@ -240,23 +244,20 @@ h2
     position: fixed;
     left: 2px;
     top: 2px;
-    border: 10px solid #FFF; /* spinner's path */
-    border-top: 10px solid #F0CF00; /* Small spinner */
-    border-radius: 50%;
     width: 20px;
     height: 20px;
-    animation: spin 2s linear infinite;
+    animation: fadeIn 2s;
 }
 
-@keyframes spin 
+@keyframes fadeIn
 {
     0% 
     {
-        transform: rotate(0deg);
+        opacity: 0;
     }
     100%
     {
-        transform: rotate(360deg);
+        opacity: 1;
     }
 }
 
