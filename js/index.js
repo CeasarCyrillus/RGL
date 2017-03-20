@@ -16,16 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-function Alert(msg)
-{
-    document.getElementById("Alert").style.opacity = 1;
-    document.getElementById("AlertInfo").innerHTML = msg;
-}
-function closeAlert()
-{
-    document.getElementById("Alert").style.opacity = 0;
-}
-
 function scan()
 {
     cordova.plugins.barcodeScanner.scan(
@@ -36,7 +26,7 @@ function scan()
     },
     function(error)
     {
-        Alert(error);
+        console.log(error);
     },
     {
         preferFrontCamera : false, // iOS and Android
@@ -55,7 +45,6 @@ function scan()
 
 function keyboardDown()
 {
-    closeAlert();
     var header = document.getElementById("header");
     var field = document.getElementById("hiddenInput");
     var content = document.getElementById("result");
@@ -86,7 +75,6 @@ function startApp()
 }
 function showInfo(id)
 {
-    closeAlert();
     var ids = ["name", "form", "ic", "ooc", "klass", "forbud", "dispens", "ovrigt"];
     var el = document.getElementById("popupInfo");
     el.style.display = "block";
@@ -251,7 +239,6 @@ function searchData()
         {
             var results = searchName(string, format);
         }
-        alert(results);
         if(results == 0)
         {
             document.getElementById('result').innerHTML = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!";
@@ -277,10 +264,10 @@ function update()
         {
             var text = req.responseText;
             localStorage.setItem("drugs", LZString.compress(text));
-            drugs = text.split(";;")
+            drugs = text.split(";;");
         }
     }
-    catch(e){alert(e); Alert(failMsg)}
+    catch(e){console.log(e);}
 }
 
 function loadData()

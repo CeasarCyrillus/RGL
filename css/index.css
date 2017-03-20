@@ -282,27 +282,3 @@ h2
     margin: 0;
     padding: 0;
 }
-
-#Alert
-{
-    position: fixed;
-    width: 100vw;
-    height: auto;
-    opacity: 0;
-    background-color: #f44336;
-    transition: opacity 0.6s;
-    color: white;
-    font-size: 20px;
-    border-radius: 20px;
-}
-
-#AlertButton
-{
-    position: fixed;
-    right: 2px;
-}
-
-#AlertInfo
-{
-    text-align: center;
-}
