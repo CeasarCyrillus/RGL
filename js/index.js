@@ -32,7 +32,7 @@ function scan()
     function(result)
     {
         document.getElementById("search").value = result.text;
-        displayData();
+        search();
     },
     function(error)
     {
@@ -231,7 +231,7 @@ function searchEan(string, format)
     document.getElementById('result').innerHTML = innerhtml;
     return results;
 }
-function displayData()
+function search()
 {
     closeAlert();
     var string = document.getElementById("search").value;
