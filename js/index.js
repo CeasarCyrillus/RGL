@@ -160,9 +160,10 @@ function isNum(string)
     return string.match(/^[0-9]+$/) != null;
 }
 
-function searchName(string)
+function searchName(string, format)
 {
     var results = 0;
+    var innerhtml = "";
     for(var i = 0; i < drugs.length; i++)
     {
         var prep = drugs[i].split(";");
@@ -189,22 +190,24 @@ function searchName(string)
             var form = "<b>Beredningsform</b><br>" + form;
             currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
                                 "ooc":ooc, "forbud":forbud, "dispens":dispens,
-                                "ovrigt":ovrigt, "klass":klass}; 
+                                "ovrigt":ovrigt, "klass":klass};
         }
     }
+    document.getElementById('result').innerHTML = innerhtml;
+    return results;
 }
 
-function searchEan(string)
+function searchEan(string, format)
 {
+    var innerhtml = "";
     var results = 0;
     for(var i = 0; i < drugs.length; i++)
     {
         var prep = drugs[i].split(";");
         var ean = prep[7];
-        if(results > 10){break;}
         if(ean == string)
         {
-            results += 1;
+            results = 1;
             var name = prep[0];
             var form = prep[1];
             var ic = "<b>Tillåtet under tävling</b><br>"+prep[2];
@@ -225,87 +228,32 @@ function searchEan(string)
                                 "ovrigt":ovrigt, "klass":klass};          
         }
     }
+    document.getElementById('result').innerHTML = innerhtml;
+    return results;
 }
 function displayData()
 {
     closeAlert();
-    var results = 0;
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel animated fadeIn"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
-    var innerhtml = "";
+    currentData = {};
     if(string.length > 0)
     {
         document.getElementById('result').innerHTML = "";
         currentData = {};
         if(isNum(string))
         {
-            for(var i = 0; i < drugs.length; i++)
-            {
-                var prep = drugs[i].split(";");
-                var ean = prep[7];
-                if(results > 10){break;}
-                if(ean == string)
-                {
-                    results += 1;
-                    var name = prep[0];
-                    var form = prep[1];
-                    var ic = "<b>Tillåtet under tävling</b><br>"+prep[2];
-                    var ooc = "<b>Tillåtet utanför tävling</b><br>"+prep[3];
-                    var klass = "<b>Dopingklass</b><br>"+prep[8];
-                    var forbud = "<b>Förbud</b><br>"+prep[4];
-                    var dispens = "<b>Dispens</b><br>"+prep[5];
-                    var ovrigt = "<b>Övrigt</b><br>"+prep[6];
-        
-                    var text = format.replace("ID", i);
-                    var name = "<b>" + name + "</b><br>"
-                    var text = text.replace("NAME", name);
-                    var text = text.replace("FORM", form);
-                    innerhtml += text;
-                    var form = "<b>Beredningsform</b><br>" + form;
-                    currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
-                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
-                                        "ovrigt":ovrigt, "klass":klass};          
-                }
-            }
+            var results = searchEan(string, format);
         }
         else
         {
-            for(var i = 0; i < drugs.length; i++)
-            {
-                var prep = drugs[i].split(";");
-                var name = prep[0];
-                if(results > 10){break;}
-                if (name.toLowerCase().indexOf(string.toLowerCase())+1 > 0)
-                {
-                    results += 1;
-                    console.log("correct");
-                    var name = prep[0];
-                    var form = prep[1];
-                    var ic = "<b>Tillåtet under tävling</b><br>"+prep[2];
-                    var ooc = "<b>Tillåtet utanför tävling</b><br>"+prep[3];
-                    var klass = "<b>Dopingklass</b><br>"+prep[8];
-                    var forbud = "<b>Förbud</b><br>"+prep[4];
-                    var dispens = "<b>Dispens</b><br>"+prep[5];
-                    var ovrigt = "<b>Övrigt</b><br>"+prep[6];
-        
-                    var text = format.replace("ID", i);
-                    var name = "<b>" + name + "</b><br>"
-                    var text = text.replace("NAME", name);
-                    var text = text.replace("FORM", form);
-                    innerhtml += text;
-                    var form = "<b>Beredningsform</b><br>" + form;
-                    currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
-                                        "ooc":ooc, "forbud":forbud, "dispens":dispens,
-                                        "ovrigt":ovrigt, "klass":klass}; 
-                }
-            }
+            var results = searchName(string, format);
         }
 
         if(results == 0)
         {
             innerhtml = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!";
         }
-        document.getElementById('result').innerHTML = innerhtml;
     }
     else
     {
@@ -385,3 +333,4 @@ function checkUpdate()
 
 var url = "http://fecabook.hol.es/handlefile.php?filename=";
 checkUpdate();
+startApp();
