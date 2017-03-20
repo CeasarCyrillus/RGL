@@ -165,7 +165,6 @@ function displayData()
     var results = 0;
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
-    document.getElementById("loader").style.display = "block";
     var innerhtml = "";
     if(string.length > 0)
     {

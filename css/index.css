@@ -246,16 +246,17 @@ h2
     display: inline-block;
     vertical-align: bottom;
 }
+
 #loader 
 {
-    border: 2px solid white;
-    border-radius: 10px;
+    border: 3px solid #FFF;
+    border-radius: 20px;
     width: 20px;
     height: 20px;
     position: fixed;
-    left: 2px;
-    top: 10px;
-    animation: rubberBand 2s infinite;
+    left: 8px;
+    top: 8px;
+    animation: wobble 1s infinite;
 }
 
 
