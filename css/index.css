@@ -193,7 +193,8 @@ p
 
 #result
 {
-    padding-bottom: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 #result p
