@@ -32,7 +32,7 @@ function scan()
     function(result)
     {
         document.getElementById("search").value = result.text;
-        search();
+        searchData();
     },
     function(error)
     {
@@ -163,11 +163,8 @@ function isNum(string)
 function searchName(string, format)
 {
     var results = 0;
-<<<<<<< HEAD
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
-=======
->>>>>>> new-search
     var innerhtml = "";
     for(var i = 0; i < drugs.length; i++)
     {
@@ -237,7 +234,7 @@ function searchEan(string, format)
     return results;
 }
 
-function search()
+function searchData()
 {
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
@@ -254,10 +251,10 @@ function search()
         {
             var results = searchName(string, format);
         }
-
+        alert(results);
         if(results == 0)
         {
-            innerhtml = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!";
+            document.getElementById('result').innerHTML = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!";
         }
     }
     else
