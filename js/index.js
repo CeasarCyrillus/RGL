@@ -235,7 +235,7 @@ function displayData()
 {
     closeAlert();
     var string = document.getElementById("search").value;
-    var format = '<li class="Lakemedel animated fadeIn"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
+    var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
     currentData = {};
     if(string.length > 0)
     {

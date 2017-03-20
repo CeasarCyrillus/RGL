@@ -164,7 +164,6 @@ p
     position: fixed;
     overflow: scroll;
     top: 0;
-    bottom: 0;
     background-color: #FFF;
     color: #2F292B;
 }
