@@ -231,9 +231,9 @@ function searchEan(string, format)
     document.getElementById('result').innerHTML = innerhtml;
     return results;
 }
+
 function search()
 {
-    closeAlert();
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
     currentData = {};
