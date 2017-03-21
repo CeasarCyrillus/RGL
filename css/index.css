@@ -242,8 +242,10 @@ h2
 #fileInputImg
 {
     float: right;
-    width: 44px;
-    /*height: 100%;*/
+    width: auto;
+    height: 34px;
+    padding: 0;
+    margin: 5px 0;
     display: inline-block;
     vertical-align: bottom;
 }
