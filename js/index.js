@@ -162,7 +162,6 @@ function searchName(string, format)
         if(name.toLowerCase().indexOf(string.toLowerCase())+1 > 0)
         {
             results += 1;
-            console.log("correct");
             var name = prep[0];
             var form = prep[1];
             var ic = "<b>Tillåtet under tävling</b><br>"+prep[2];
