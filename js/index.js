@@ -198,6 +198,7 @@ function searchEan(string, format)
         if(ean == string)
         {
             results = 1;
+            document.getElementById("search").value = "";
             var name = prep[0];
             var form = prep[1];
             var ic = "<b>Tillåtet under tävling</b><br>"+prep[2];
@@ -215,10 +216,11 @@ function searchEan(string, format)
             var form = "<b>Beredningsform</b><br>" + form;
             currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
                                 "ooc":ooc, "forbud":forbud, "dispens":dispens,
-                                "ovrigt":ovrigt, "klass":klass};          
+                                "ovrigt":ovrigt, "klass":klass};
+            showInfo(i);
+            break       
         }
     }
-    document.getElementById('result').innerHTML = innerhtml;
     return results;
 }
 
@@ -231,7 +233,7 @@ function searchData()
     {
         document.getElementById('result').innerHTML = "";
         currentData = {};
-        if(isNum(string))
+        if(isNum(string) && string.length == 13)
         {
             var results = searchEan(string, format);
         }
@@ -241,7 +243,7 @@ function searchData()
         }
         if(results == 0)
         {
-            document.getElementById('result').innerHTML = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!";
+            document.getElementById('result').innerHTML = "<p>Hittade inget resultat för din sökning!</p>";
         }
     }
     else
