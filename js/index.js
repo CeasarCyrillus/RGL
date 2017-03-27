@@ -151,8 +151,6 @@ function isNum(string)
 function searchName(string, format)
 {
     var results = 0;
-    var string = document.getElementById("search").value;
-    var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
     var innerhtml = "";
     for(var i = 0; i < drugs.length; i++)
     {
