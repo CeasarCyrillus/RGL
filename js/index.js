@@ -26,7 +26,7 @@ function scan()
     },
     function(error)
     {
-        console.log(error);
+        document.getElementById('result').innerHTML = "<p>Hittade inget resultat för din sökning!</p>";
     },
     {
         preferFrontCamera : false, // iOS and Android
@@ -192,6 +192,7 @@ function searchEan(string, format)
 {
     var innerhtml = "";
     var results = 0;
+    document.getElementById("search").value = "";
     for(var i = 0; i < drugs.length; i++)
     {
         var prep = drugs[i].split(";");
@@ -199,7 +200,6 @@ function searchEan(string, format)
         if(ean == string)
         {
             results = 1;
-            document.getElementById("search").value = "";
             var name = prep[0];
             var form = prep[1];
             var ic = "<b>Tillåtet under tävling</b><br>"+prep[2];
@@ -229,6 +229,7 @@ function searchData()
 {
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
+    var failmsg = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!</p>";
     currentData = {};
     if(string.length > 0)
     {
@@ -237,6 +238,7 @@ function searchData()
         if(isNum(string) && string.length == 13)
         {
             var results = searchEan(string, format);
+            var failmsg = "<p>Streckkoden <b>" + string + "</b> finns inte med i databasen!</p>";
         }
         else
         {
@@ -244,7 +246,7 @@ function searchData()
         }
         if(results == 0)
         {
-            document.getElementById('result').innerHTML = "<p>Hittade inget resultat för din sökning!</p>";
+            document.getElementById('result').innerHTML = failmsg;
         }
     }
     else
@@ -261,6 +263,7 @@ function update()
     req.overrideMimeType('text/xml; charset=iso-8859-1');
     req.onreadystatechange = function(e)
     {
+        alert(req.readyState);
         if(req.readyState == 4 && req.status == 200)
         {
             var text = req.responseText;
@@ -269,6 +272,7 @@ function update()
             document.getElementById("loader").style.display = "none";
             document.getElementById("search").disabled = (drugs==null);
             document.getElementById("fileInputImg").disabled = (drugs==null);
+            alert("Loaded!");
         }
     };
     req.send();

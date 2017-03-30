@@ -46,14 +46,14 @@
 <body>
     <input type="text" id="hiddenInput">
     <div id="loader"></div>
-    <div id="topHeader">Röd-Gröna listan<img id="fileInputImg" src="img/scanner.png" disabled="true" onclick="scan();"> </div>
+    <div id="topHeader"><span class="title">Röd-Gröna listan</span><img id="fileInputImg" src="img/scanner.png" disabled="true" onclick="scan();"> </div>
     <div id="header">
         <form id="formInput" oninput="searchData();">
             <input autocomplete="off" placeholder="Sök här!" id="search" type="search" name="Search" disabled="true">
         </form>
     </div>
     <div ondblclick="closePopup();" id="popupInfo">
-    	<div id="infoHeader"><img id="backButton" onclick="closePopup();" src="img/backbutton.png">Information</div>
+    	<div id="infoHeader"><img id="backButton" onclick="closePopup();" src="img/backbutton.png"><span class="title">Information</span></div>
     	<div id="infoBody">
 	    	<div id="name"></div>
 	        <div id="form"></div>
