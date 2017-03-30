@@ -255,16 +255,14 @@ function searchData()
 
 function update()
 {
-    req = new XMLHttpRequest();
+    var req = new XMLHttpRequest();
     var URL = "http://fecabook.hol.es/handlefile.php?filename=databas";
-    req.open("GET", URL, false);
+    req.open("GET", URL, true);
     req.overrideMimeType('text/xml; charset=iso-8859-1');
-    try
+    req.onreadystatechange = function(e)
     {
-        req.send();
-        if(req.status == 200)
+        if(req.readyState == 4 && req.status == 200)
         {
-            console.log("Recv");
             var text = req.responseText;
             localStorage.setItem("drugs", LZString.compress(text));
             drugs = text.split(";;");
@@ -272,8 +270,8 @@ function update()
             document.getElementById("search").disabled = (drugs==null);
             document.getElementById("fileInputImg").disabled = (drugs==null);
         }
-    }
-    catch(e){console.log(e);}
+    };
+    req.send();
 }
 
 function loadData()
