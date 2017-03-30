@@ -70,8 +70,12 @@ document.getElementById("formInput").addEventListener("submit", function(event)
 
 function startApp()
 {
-    document.getElementById("search").disabled = false;
+    
     document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
+    document.getElementById("loader").style.display = "block";
+    var status = false;
+    checkUpdate();
+
 }
 function showInfo(id)
 {
@@ -172,7 +176,7 @@ function searchName(string, format)
             var text = format.replace("ID", i);
             var name = "<b>" + name + "</b><br>"
             var text = text.replace("NAME", name);
-            var text = text.replace("FORM", form);
+            var text = text.replace("FORM", "<i>"+form+"</i");
             innerhtml += text;
             var form = "<b>Beredningsform</b><br>" + form;
             currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
@@ -245,25 +249,29 @@ function searchData()
     }
     else
     {
-        startApp();
+        document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
     }
 }
 
 function update()
 {
-    var failMsg = "Röd gröna listan kräver en uppdatering, se till att du är ansluten till internet och starta om appen!";
     req = new XMLHttpRequest();
-    var url = "http://fecabook.hol.es/databas.txt";
-    req.open("GET", url, false);
+    var URL = "http://fecabook.hol.es/handlefile.php?filename=databas";
+    req.open("GET", URL, false);
     req.overrideMimeType('text/xml; charset=iso-8859-1');
     try
     {
         req.send();
         if(req.status == 200)
         {
+            console.log("Recv");
             var text = req.responseText;
             localStorage.setItem("drugs", LZString.compress(text));
             drugs = text.split(";;");
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("search").disabled = (drugs==null);
+            document.getElementById("fileInputImg").disabled = (drugs==null);
+            alert(drugs==null);
         }
     }
     catch(e){console.log(e);}
@@ -271,22 +279,13 @@ function update()
 
 function loadData()
 {
-    document.getElementById("loader").style.display = "block";
     drugs = LZString.decompress(localStorage.getItem("drugs")).split(";;");
-    document.getElementById("loader").style.display = "none";
-    startApp();
 }
 
 function checkUpdate()
 {
-    /* If user is starting app for first time*/
-    if(document.getElementById("anslut") != null)
-    {
-        document.getElementById("anslut").innerHTML = "Ansluter..";
-    }
     try
     {
-        /*Chekca om internet anslutning existerar*/
         var netStatus = checkNetwork();
         if(netStatus)
         {
@@ -320,5 +319,4 @@ function checkUpdate()
 }
 
 var url = "http://fecabook.hol.es/handlefile.php?filename=";
-checkUpdate();
 startApp();
