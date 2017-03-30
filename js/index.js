@@ -271,7 +271,6 @@ function update()
             document.getElementById("loader").style.display = "none";
             document.getElementById("search").disabled = (drugs==null);
             document.getElementById("fileInputImg").disabled = (drugs==null);
-            alert(drugs==null);
         }
     }
     catch(e){console.log(e);}
@@ -280,6 +279,8 @@ function update()
 function loadData()
 {
     drugs = LZString.decompress(localStorage.getItem("drugs")).split(";;");
+    document.getElementById("search").disabled = (drugs==null);
+    document.getElementById("fileInputImg").disabled = (drugs==null);
 }
 
 function checkUpdate()
