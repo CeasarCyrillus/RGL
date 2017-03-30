@@ -2207,6 +2207,7 @@
 .rotateIn {
   -webkit-animation-name: rotateIn;
   animation-name: rotateIn;
+  animation-duration: .5s; /*HERE*/
 }
 
 @-webkit-keyframes rotateInDownLeft {
@@ -2408,6 +2409,7 @@
 .rotateOut {
   -webkit-animation-name: rotateOut;
   animation-name: rotateOut;
+  animation-duration: .5s; /*HERE*/
 }
 
 @-webkit-keyframes rotateOutDownLeft {
@@ -3182,6 +3184,7 @@
 .slideInRight {
   -webkit-animation-name: slideInRight;
   animation-name: slideInRight;
+  animation-duration: .5s; /*HERE*/
 }
 
 @-webkit-keyframes slideInUp {
@@ -3306,6 +3309,7 @@
 .slideOutRight {
   -webkit-animation-name: slideOutRight;
   animation-name: slideOutRight;
+  animation-duration: .5s; /*HERE*/
 }
 
 @-webkit-keyframes slideOutUp {

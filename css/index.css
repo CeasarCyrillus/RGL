@@ -183,7 +183,10 @@ p
 {
     display: none;
 }
-
+#infoBody div
+{
+    margin-bottom: 10px;
+}
 #popupInfo #backButton
 {
     width: 44px;
@@ -204,36 +207,12 @@ p
     color: #000;
 }
 
-#anslut
-{
-    position: fixed;
-    top: 5px;
-    right: 5px;
-    border: 2px solid #6687e7;
-    background-color: #3454b4;
-    color: white;
-    border-radius: 20px;
-    padding: 10px;
-    display: none;
-    text-align: center;
-}
-#anslut
-{
-    display: block;
-    position: unset;
-    background-color: #4169e1;
-    width: 200px;
-    margin-left: calc(50vw - 100px);
-}
 
-#anslut:active
-{
-    background-color: white;
-    color: black;
-}
+
 h3
 {
     text-align: center;
+    font-size: 1.5em;
     margin: 0;
     padding: 0;
 }
@@ -245,11 +224,11 @@ h2
 {
     float: right;
     width: auto;
-    height: 34px;
+    height: 44px;
     padding: 0;
-    margin: 5px 0;
+    margin: 0;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
 #loader 

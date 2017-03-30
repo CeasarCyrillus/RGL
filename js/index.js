@@ -89,7 +89,6 @@ function showInfo(id)
     setTimeout(function()
     {
         document.getElementById("infoBody").style.display = "block";
-        document.getElementById("infoBody").className = "animated slideInUp"; //
     }, 200);
 
     for(var i = 0; i < ids.length; i++)
@@ -107,7 +106,6 @@ function closePopup()
     el.className = "animated rotateOut";
 
     //Animate out body
-    document.getElementById("infoBody").className = "animated slideOutDown"; //
 }
 
 function checkNetwork()
@@ -176,7 +174,7 @@ function searchName(string, format)
             var text = format.replace("ID", i);
             var name = "<b>" + name + "</b><br>"
             var text = text.replace("NAME", name);
-            var text = text.replace("FORM", "<i>"+form+"</i");
+            var text = text.replace("FORM", "<i>"+form+"</i>");
             innerhtml += text;
             var form = "<b>Beredningsform</b><br>" + form;
             currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
@@ -212,7 +210,7 @@ function searchEan(string, format)
             var text = format.replace("ID", i);
             var name = "<b>" + name + "</b><br>"
             var text = text.replace("NAME", name);
-            var text = text.replace("FORM", form);
+            var text = text.replace("FORM", "<i>"+form+"</i>");
             innerhtml += text;
             var form = "<b>Beredningsform</b><br>" + form;
             currentData[i] = {"name":"<h3>"+prep[0]+"<h3>", "form":form, "ic":ic,
