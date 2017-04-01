@@ -134,12 +134,27 @@ ul, li
 {
     text-align: center;
     font-family: 'Open Sans';
-    font-size: 32px;
-    height: 44px;
+    font-size: 25px;
+    height: 50px;
     color: #FFF;
     background-color: #3E60AA;
     padding: 0;
     margin: 0;
+}
+::-webkit-scrollbar {display: none;}
+
+.title, #fileInputImg
+{
+    height: 100%;
+    width: auto;
+    display: inline-block;
+    vertical-align: bottom;
+}
+#fileInputImg
+{
+    float: right;
+    margin: 0;
+    padding: 0;
 }
 
 #search
@@ -185,8 +200,10 @@ p
 }
 #infoBody div
 {
-    margin-bottom: 10px;
+   margin: 0;
+   padding: 0;
 }
+
 #popupInfo #backButton
 {
     width: 44px;
@@ -220,29 +237,24 @@ h2
 {
     font-size: 1.5em;
 }
-#fileInputImg
-{
-    float: right;
-    width: auto;
-    height: 44px;
-    padding: 0;
-    margin: 0;
-    display: inline-block;
-    vertical-align: middle;
-}
 
-#loader 
+
+#spinner 
 {
-    border: 3px solid #FFF;
+    border: 6px solid #FFF;
+    border-top: 6px solid #6580BB;
     border-radius: 20px;
     width: 20px;
     height: 20px;
     position: fixed;
     left: 8px;
     top: 8px;
-    animation: wobble 1s infinite;
+    animation: spin 2s ease-in-out infinite;
 }
-
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 #hiddenInput
 {

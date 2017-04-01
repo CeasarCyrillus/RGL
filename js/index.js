@@ -72,7 +72,6 @@ function startApp()
 {
     
     document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
-    document.getElementById("loader").style.display = "block";
     var status = false;
     checkUpdate();
 
@@ -95,6 +94,14 @@ function showInfo(id)
     {
         el = document.getElementById(ids[i]);
         el.innerHTML = currentData[id][ids[i]];
+        if(currentData[id][ids[i]].split("<br>")[1] == "-")
+        {
+            el.innerHTML = "";
+        }
+        else
+        {
+            el.style.marginBottom = "20px";
+        }
     }
 }
 function closePopup()
@@ -114,7 +121,6 @@ function checkNetwork()
     {
         return false;
     }
-    document.getElementById("loader").style.display = "block";
     var fileURL = "http://fecabook.hol.es/handlefile.php?filename=check";
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", fileURL, false); 
@@ -136,7 +142,6 @@ function checkNetwork()
     }
     try{rawFile.send();}
     catch(e){console.log(e); status = false;}
-    document.getElementById("loader").style.display = "none";
     return status;
 }
 
@@ -225,6 +230,7 @@ function searchEan(string, format)
 
 function searchData()
 {
+    document.getElementById("spinner").style.display = "block";
     var string = document.getElementById("search").value;
     var format = '<li class="Lakemedel"><div id="ID" onclick="showInfo(this.id);" class="Produktnamn">NAMEFORM</div></li>';
     var failmsg = "<p>Hittade inget resultat för din sökning på <b>" + string + "</b>!</p>";
@@ -236,6 +242,7 @@ function searchData()
         if(isNum(string) && string.length == 13)
         {
             var results = searchEan(string, format);
+            document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
             var failmsg = "<p>Streckkoden <b>" + string + "</b> finns inte med i databasen!</p>";
         }
         else
@@ -251,8 +258,22 @@ function searchData()
     {
         document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
     }
+    document.getElementById("spinner").style.display = "none";
 }
 
+function version()
+{
+    var req = new XMLHttpRequest();
+    var URL = "http://fecabook.hol.es/handlefile.php?filename=version";
+    req.open("GET", URL, false);
+    req.overrideMimeType('text/xml; charset=iso-8859-1');
+    req.send();
+    if(req.status == 200)
+    {
+        var version = req.responseText;
+    }
+    return version;
+}
 function update()
 {
     var req = new XMLHttpRequest();
@@ -261,16 +282,20 @@ function update()
     req.overrideMimeType('text/xml; charset=iso-8859-1');
     req.onreadystatechange = function(e)
     {
-        alert(req.readyState);
         if(req.readyState == 4 && req.status == 200)
         {
             var text = req.responseText;
-            localStorage.setItem("drugs", LZString.compress(text));
-            drugs = text.split(";;");
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("search").disabled = (drugs==null);
-            document.getElementById("fileInputImg").disabled = (drugs==null);
-            alert("Loaded!");
+            setTimeout(function() //In timeout function to be able to run in background
+            {
+                localStorage.setItem("drugs", LZString.compress(text));
+                drugs = text.split(";;");
+                document.getElementById("search").disabled = (drugs==null);
+                document.getElementById("fileInputImg").disabled = (drugs==null);
+                var currentVersion = version();
+                localStorage.setItem("version", currentVersion);
+                document.getElementById("spinner").style.display = "none";
+                document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
+            }, 1);
         }
     };
     req.send();
@@ -281,40 +306,49 @@ function loadData()
     drugs = LZString.decompress(localStorage.getItem("drugs")).split(";;");
     document.getElementById("search").disabled = (drugs==null);
     document.getElementById("fileInputImg").disabled = (drugs==null);
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("result").innerHTML = "<p>Här kan du kontrollera om ett läkemedel omfattas av dopingreglerna eller inte. Förteckningen omfattar enbart läkemedel godkända i Sverige för humant bruk.</p>";
 }
 
 function checkUpdate()
 {
-    try
+    window.document.getElementById("spinner").style.display = "block";
+    var netStatus = checkNetwork();
+    var currentVersion = localStorage.getItem("version");
+    try{clearInterval(updateChecker);}
+    catch(e){console.log(e)};
+    if(netStatus)
     {
-        var netStatus = checkNetwork();
-        if(netStatus)
+        if(currentVersion != null)
         {
-            var status = localStorage.getItem("drugs");
-            if(status == null)
+            if(currentVersion == version())
             {
-                update();
+                loadData();
             }
             else
             {
-                loadData();
+                update();
             }
         }
         else
         {
-            loadData();
-        }
-    }
-    catch(e)
-    {
-        var status = localStorage.getItem("drugs");
-        if(status == null)
-        {
             update();
         }
-        else /*Offline but got all data*/
+    }
+    else
+    {
+        if(currentVersion != null)
         {
             loadData();
+        }
+        else
+        {
+            document.getElementById("result").innerHTML = "<p>Röd-Gröna listan kräver en internet anslutning vid första starten, se till att du har tillgång till internet!</p>"
+            updateChecker = setInterval(function()
+                {
+                    checkUpdate();
+                }
+                , 1000);
         }
     }
 }
