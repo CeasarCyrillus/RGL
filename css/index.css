@@ -150,6 +150,10 @@ ul, li
     display: inline-block;
     vertical-align: bottom;
 }
+.title
+{
+    margin-top: 5px;
+}
 #fileInputImg
 {
     float: right;
